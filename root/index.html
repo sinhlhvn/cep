@@ -29,7 +29,7 @@
 
     .reveal h1,.reveal h2,.reveal h3{ color:#fff; text-transform:none; letter-spacing:-.01em; font-weight:800; line-height:1.12; }
     .reveal h1{ font-size:2.0em; }
-    .reveal h2{ font-size:1.35em; margin-bottom:.35em; }
+    .reveal h2{ font-size:1.35em; margin-bottom:.7em; }
     .reveal h3{ font-size:1.0em; color:var(--brand2); }
     .reveal strong{ color:var(--brand2); }
     .reveal em{ color:var(--muted); font-style:normal; }
@@ -76,8 +76,8 @@
     .state.run{ border-color:var(--ok); color:#bff7e4; }
     .state.done{ border-color:var(--brand); color:var(--brand2); }
 
-    table.mini{ width:100%; border-collapse:collapse; font-size:.52em; }
-    table.mini th,table.mini td{ text-align:left; padding:.4em .5em; border-bottom:1px solid var(--panel-b); }
+    table.mini{ width:100%; border-collapse:collapse; font-size:.72em; }
+    table.mini th,table.mini td{ text-align:left; padding:.6em .7em; border-bottom:1px solid var(--panel-b); }
     table.mini th{ color:var(--brand2); font-weight:700; }
     table.mini td:first-child{ color:#fff; font-weight:600; white-space:nowrap; }
 
@@ -89,14 +89,29 @@
            letter-spacing:.1em; }
     .reveal .slide-number{ background:transparent; color:var(--muted); font-size:16px; }
 
-    /* HLA arch */
-    .arch{ display:grid; grid-template-columns:repeat(4,1fr); gap:.55em; font-size:.55em; }
-    .layer{ background:var(--panel); border:1px solid var(--panel-b); border-radius:14px; padding:.6em .7em; }
-    .layer h4{ margin:0 0 .3em; color:var(--brand2); font-size:1em; }
-    .layer span{ display:block; color:var(--muted); font-size:.85em; line-height:1.4; }
-    .full{ grid-column:1 / -1; }
-    .store{ background:linear-gradient(180deg,rgba(55,214,160,.14),rgba(55,214,160,.04));
-            border-color:rgba(55,214,160,.35); }
+    /* HLA arch — tiered / layered */
+    .hla{ display:flex; flex-direction:column; gap:.28em; margin-top:.2em; font-size:.5em; }
+    .tier{ display:grid; grid-template-columns:7.2em 1fr; align-items:stretch; gap:.6em; }
+    .tier .tlabel{ display:flex; flex-direction:column; justify-content:center;
+                   font-size:.8em; font-weight:800; letter-spacing:.1em; color:var(--brand2);
+                   text-align:right; text-transform:uppercase; line-height:1.15; }
+    .tier .tlabel small{ font-size:.75em; color:var(--muted); font-weight:600; letter-spacing:.02em;
+                         text-transform:none; margin-top:.1em; }
+    .tbody{ display:flex; gap:.45em; }
+    .box{ flex:1; background:var(--panel); border:1px solid var(--panel-b); border-radius:12px;
+          padding:.5em .65em; }
+    .box b{ display:block; color:#fff; font-size:.98em; font-weight:700; letter-spacing:.01em; }
+    .box span{ display:block; color:var(--muted); font-size:.82em; line-height:1.32; margin-top:.14em; }
+    .box.eng{ background:linear-gradient(180deg,rgba(255,122,26,.20),rgba(255,122,26,.05));
+              border-color:rgba(255,182,72,.55); }
+    .box.eng b{ color:var(--brand2); }
+    .box.data{ background:linear-gradient(180deg,rgba(55,214,160,.15),rgba(55,214,160,.04));
+               border-color:rgba(55,214,160,.4); }
+    .conn{ margin-left:7.8em; color:var(--brand); font-size:.72em; font-weight:800;
+           letter-spacing:.08em; display:flex; align-items:center; gap:.5em; }
+    .conn::before{ content:"▼"; font-size:.8em; }
+    .conn.up{ color:var(--ok); }
+    .conn.up::before{ content:"▲"; }
   </style>
 </head>
 <body>
@@ -104,15 +119,34 @@
 
   <!-- ===== TITLE ===== -->
   <section data-background-gradient="radial-gradient(900px 600px at 80% 10%, rgba(255,122,26,.22), transparent), linear-gradient(160deg,#0f1a30,#0b1220)">
-    <span class="kicker">FPT Play · Olympus · Growth</span>
+    <span class="kicker">FPT Play · Big Data · CEP</span>
     <h1>Customer Engagement<br><span class="accent">Platform (CEP)</span></h1>
-    <p class="lead" style="margin-top:.6em">Nền tảng <strong>self-service</strong> giúp team Marketing / Growth / Product tự tạo campaign gửi notification đến đúng tập người dùng — không cần engineer.</p>
-    <div class="pills" style="margin-top:1.1em">
-      <span class="pill">1 · Vấn đề &amp; Tầm nhìn</span>
-      <span class="pill">2 · Cách hoạt động</span>
-      <span class="pill">3 · Tính năng chính</span>
-      <span class="pill">4 · Kiến trúc HLA</span>
-      <span class="pill">5 · Độ đo &amp; KPIs</span>
+    <p class="lead" style="margin-top:.6em">Nền tảng <strong>self-service</strong> giúp team Marketing / Product tự tạo campaign gửi notification đến đúng tập user — không cần engineer.</p>
+    <div class="grid" style="grid-template-columns:repeat(6,1fr);gap:.5em;margin-top:1.2em">
+      <div class="card" style="text-align:center;padding:.9em .5em">
+        <div style="font-size:1.1em;font-weight:800;color:var(--brand)">01</div>
+        <div style="font-size:.5em;color:var(--ink);font-weight:600;margin-top:.35em;line-height:1.3">Vấn đề &amp; Tầm nhìn</div>
+      </div>
+      <div class="card" style="text-align:center;padding:.9em .5em">
+        <div style="font-size:1.1em;font-weight:800;color:var(--brand)">02</div>
+        <div style="font-size:.5em;color:var(--ink);font-weight:600;margin-top:.35em;line-height:1.3">Cách hoạt động</div>
+      </div>
+      <div class="card" style="text-align:center;padding:.9em .5em">
+        <div style="font-size:1.1em;font-weight:800;color:var(--brand)">03</div>
+        <div style="font-size:.5em;color:var(--ink);font-weight:600;margin-top:.35em;line-height:1.3">Tính năng chính</div>
+      </div>
+      <div class="card" style="text-align:center;padding:.9em .5em">
+        <div style="font-size:1.1em;font-weight:800;color:var(--brand)">04</div>
+        <div style="font-size:.5em;color:var(--ink);font-weight:600;margin-top:.35em;line-height:1.3">Kiến trúc HLA</div>
+      </div>
+      <div class="card" style="text-align:center;padding:.9em .5em">
+        <div style="font-size:1.1em;font-weight:800;color:var(--brand)">05</div>
+        <div style="font-size:.5em;color:var(--ink);font-weight:600;margin-top:.35em;line-height:1.3">Campaign Trigger</div>
+      </div>
+      <div class="card" style="text-align:center;padding:.9em .5em">
+        <div style="font-size:1.1em;font-weight:800;color:var(--brand)">06</div>
+        <div style="font-size:.5em;color:var(--ink);font-weight:600;margin-top:.35em;line-height:1.3">Độ đo &amp; KPIs</div>
+      </div>
     </div>
   </section>
 
@@ -131,14 +165,14 @@
             <li>Khó đo lường hiệu quả chiến dịch</li>
             <li>Không có nơi quản lý tập trung</li>
             <li>Marketing <strong style="color:#ff9a9a">không tự chủ động</strong> được</li>
-            <li>Đang dùng <strong style="color:#ff9a9a">third party</strong> để bắn notification → sync dữ liệu ra ngoài, <strong style="color:#ff9a9a">không đảm bảo security</strong></li>
+            <li>Đang dùng <strong style="color:#ff9a9a">bên thứ ba</strong> để gửi notification → đồng bộ dữ liệu ra ngoài, <strong style="color:#ff9a9a">không đảm bảo bảo mật</strong></li>
             <li>Nhu cầu phía marketer ngày càng phức tạp</li>
-            <li>Tool third party <strong style="color:#ff9a9a">không hỗ trợ</strong> in-app noti / in-app popup</li>
+            <li>Công cụ bên thứ ba <strong style="color:#ff9a9a">không hỗ trợ</strong> in-app noti / in-app popup</li>
           </ul>
         </div>
         <div class="card" style="border-color:rgba(55,214,160,.4)">
           <h3>🎯 Tầm nhìn — Mục tiêu</h3>
-          <p style="font-size:.58em">Một nền tảng <strong>self-service</strong> để team growth có thể:</p>
+          <p style="font-size:.58em">Một nền tảng <strong>self-service</strong> để team Marketing / Product có thể:</p>
           <ul class="tight small">
             <li>Định nghĩa <strong>segment</strong> theo nhiều tiêu chí</li>
             <li>Tạo <strong>campaign</strong> gửi tới segment đó</li>
@@ -155,16 +189,12 @@
       <h2>Ai dùng CEP? <span style="font-size:.6em;color:var(--muted)">(Personas)</span></h2>
       <table class="mini" style="margin-top:.3em">
         <tr><th>Persona</th><th>Nhu cầu chính</th></tr>
-        <tr><td>Marketer / Growth</td><td>Campaign khuyến mãi, retention, win-back; tự định nghĩa segment</td></tr>
-        <tr><td>Product Manager</td><td>Thông báo tính năng mới, onboarding flow</td></tr>
-        <tr><td>Operator / CS</td><td>Thông báo vận hành: bảo trì, sự cố, nhắc gia hạn</td></tr>
-        <tr><td>Admin</td><td>Quản lý quyền, channel config, rate limit, approval</td></tr>
-        <tr><td>Data / Analyst</td><td>Định nghĩa segment phức tạp, đọc báo cáo hiệu quả</td></tr>
+        <tr style="background:rgba(255,122,26,.10)"><td>📣 Marketer <span class="accent" style="font-size:.85em">· chính</span></td><td>Campaign khuyến mãi, retention, win-back; tự định nghĩa segment</td></tr>
+        <tr><td>🧭 Product Manager</td><td>Thông báo tính năng mới, onboarding flow</td></tr>
+        <tr><td>🛠️ Operator / CS</td><td>Thông báo vận hành: bảo trì, sự cố, nhắc gia hạn</td></tr>
+        <tr><td>🔐 Admin</td><td>Quản lý quyền, channel config, rate limit, approval</td></tr>
+        <tr><td>📊 Data / Analyst</td><td>Định nghĩa segment phức tạp, đọc báo cáo hiệu quả</td></tr>
       </table>
-      <div class="card" style="margin-top:.7em">
-        <h3>🚫 Ngoài phạm vi (Non-goals)</h3>
-        <p style="font-size:.55em">Không phải CDP đầy đủ · Không tự xây ML recommendation (dùng <em>athena-go/odin</em>) · Không thay thế transactional notification của backend (OTP, payment receipt)</p>
-      </div>
     </section>
   </section>
 
@@ -183,8 +213,8 @@
         <span class="node">User</span>
       </div>
       <div class="grid g3" style="margin-top:.3em">
-        <div class="card"><span class="ico">👥</span><h3>Segment</h3><p>Tập người dùng tái sử dụng, xác định bằng điều kiện</p></div>
-        <div class="card"><span class="ico">📣</span><h3>Campaign</h3><p>Một chiến dịch gửi tin: target + channel + content + lịch</p></div>
+        <div class="card"><span class="ico">👥</span><h3>Segment</h3><p>Tập user tái sử dụng, xác định bằng điều kiện</p></div>
+        <div class="card"><span class="ico">📣</span><h3>Campaign</h3><p>Một chiến dịch gửi tin: đối tượng + channel + nội dung + lịch</p></div>
         <div class="card"><span class="ico">✉️</span><h3>Message</h3><p>Nội dung có template + biến cá nhân hoá + deep link</p></div>
         <div class="card"><span class="ico">📡</span><h3>Channel</h3><p>Kênh phân phối: push, in-app, SMS, email…</p></div>
         <div class="card"><span class="ico">⚡</span><h3>Event</h3><p>Tín hiệu hành vi realtime để trigger campaign</p></div>
@@ -201,7 +231,7 @@
         <div class="card small"><h3>2 · Rule-based (Attribute)</h3><p>Điều kiện trên attribute + AND/OR/NOT. <code style="color:var(--brand2)">package=premium AND region in [HN,HCM]</code></p></div>
         <div class="card small"><h3>3 · Behavioral / Event</h3><p>Hành vi theo thời gian: đã xem ≥3 phim Anime / 7 ngày; inactive 14 ngày</p></div>
         <div class="card small"><h3>4 · Lifecycle / Subscription</h3><p>trial · active · expiring ≤3d · expired · churned · win-back</p></div>
-        <div class="card small"><h3>5 · Computed / Predictive</h3><p>churn score, LTV tier, affinity — từ <em>athena-go / odin</em></p></div>
+        <div class="card small"><h3>5 · Computed / Predictive</h3><p>churn score, LTV tier, affinity — từ <em>hệ ML / recommendation có sẵn</em></p></div>
         <div class="card small"><h3>6 · Real-time / Trigger</h3><p>Đánh giá ngay khi event xảy ra → đưa vào journey</p></div>
       </div>
       <div class="card small" style="margin-top:.55em;border-color:rgba(255,182,72,.4)">
@@ -212,7 +242,7 @@
       <div class="sec-no">PHẦN 02 · Key concept</div>
       <h2>Campaign Types &amp; Channels</h2>
       <div class="grid g2">
-        <div>
+        <div class="card">
           <h3 style="margin-bottom:.3em">5 loại Campaign</h3>
           <ul class="tight small">
             <li><strong>One-time / Broadcast</strong> — gửi 1 lần (phim mới ra mắt)</li>
@@ -222,7 +252,7 @@
             <li><strong>Transactional</strong> — bám event hệ thống, ưu tiên cao</li>
           </ul>
         </div>
-        <div>
+        <div class="card">
           <h3 style="margin-bottom:.3em">Channels</h3>
           <p style="font-size:.5em;color:var(--ok);margin:0 0 .2em;font-weight:700">✅ Đã làm</p>
           <div class="pills">
@@ -235,11 +265,15 @@
             <span class="pill" style="border-color:rgba(55,214,160,.5)">Facebook Audience</span>
             <span class="pill" style="border-color:rgba(55,214,160,.5)">Google Audience</span>
             <span class="pill" style="border-color:rgba(55,214,160,.5)">Tiktok Audience</span>
-            <span class="pill" style="border-color:rgba(55,214,160,.5)">App Push · In-App Noti · In-App Popup</span>
+          </div>
+          <p style="font-size:.5em;color:var(--brand);margin:.5em 0 .2em;font-weight:700">🔄 Đang làm</p>
+          <div class="pills">
+            <span class="pill" style="border-color:rgba(255,122,26,.55)">📱 App Push (android/ios)</span>
+            <span class="pill" style="border-color:rgba(255,122,26,.55)">🟦 Zalo OA</span>
           </div>
           <p style="font-size:.5em;color:var(--brand2);margin:.5em 0 .2em;font-weight:700">🔜 Sẽ làm</p>
           <div class="pills">
-            <span class="pill">📥 In-App Inbox</span><span class="pill">🟦 Zalo OA</span>
+            <span class="pill">💬 In-App Noti (tvscreen, web)</span><span class="pill">🪧 In-App Popup</span>
             <span class="pill">✉️ SMS</span><span class="pill">📧 Email</span>
           </div>
           <p style="font-size:.5em;color:var(--muted);margin-top:.5em">Single · <strong>Multi-channel</strong> (song song) · <strong>Fallback</strong> (push fail → SMS)</p>
@@ -269,6 +303,7 @@
         <div class="card small"><h3>📣 Campaign Management</h3><p>CRUD + lifecycle · multi-channel + fallback · A/B testing · scheduling (one-time / recurring / trigger) · duplicate &amp; template</p></div>
         <div class="card small"><h3>✍️ Content &amp; Personalization</h3><p>Template engine với biến profile/event · localization vi/en · deep link · rich media · preview theo device/channel</p></div>
         <div class="card small"><h3>📊 Analytics &amp; Reporting</h3><p>Funnel Sent→Delivered→Opened→Clicked→Converted · per campaign/variant/segment/channel · export &amp; dashboard</p></div>
+        <div class="card small"><h3>🗂️ Template &amp; Creative Library</h3><p>Thư viện message/creative dùng chung · user tự định nghĩa nội dung cho campaign · versioning &amp; approval · tái sử dụng giữa các campaign · quản lý media asset</p></div>
       </div>
     </section>
 
@@ -295,39 +330,67 @@
     <section>
       <div class="sec-no">PHẦN 04</div>
       <h2>Kiến trúc High-Level (HLA)</h2>
-      <div class="arch" style="margin-top:.3em">
-        <div class="layer"><h4>Console / UI</h4><span>Nơi tạo segment &amp; campaign (self-service)</span></div>
-        <div class="layer"><h4>Campaign Service</h4><span>CRUD · lifecycle · orchestration</span></div>
-        <div class="layer store"><h4>Segment Engine</h4><span>Evaluate điều kiện (batch + realtime) → audience + size</span></div>
-        <div class="layer store"><h4>User / Event Store</h4><span>CDP · DWH · ClickHouse</span></div>
+      <div class="hla">
 
-        <div class="layer"><h4>Scheduler / Trigger</h4><span>Cron + consume event stream (event bus)</span></div>
-        <div class="layer"><h4>Delivery Workers</h4><span>Render msg · apply guardrails · dispatch qua queue</span></div>
-        <div class="layer"><h4>Channel Adapters</h4><span>Push · In-App · SMS · Email…</span></div>
-        <div class="layer"><h4>Analytics</h4><span>Thu delivery/engagement event → Reports</span></div>
+        <div class="tier">
+          <div class="tlabel">Console<small>self-service UI</small></div>
+          <div class="tbody">
+            <div class="box"><b>Segment Builder</b><span>Định nghĩa tập user bằng điều kiện</span></div>
+            <div class="box"><b>Campaign Builder</b><span>Đối tượng · nội dung · lịch · channel</span></div>
+            <div class="box"><b>Template / Creative Manager</b><span>Thư viện message · versioning · tái sử dụng</span></div>
+            <div class="box"><b>Reports Dashboard</b><span>Funnel: delivery → open → click</span></div>
+          </div>
+        </div>
+        <div class="conn"><code style="color:var(--brand)">/cep/v1</code> · REST API</div>
+
+        <div class="tier">
+          <div class="tlabel">Application<small>orchestration</small></div>
+          <div class="tbody">
+            <div class="box"><b>Campaign Service</b><span>CRUD · lifecycle · điều phối gửi tin</span></div>
+            <div class="box"><b>Scheduler / Trigger</b><span>Cron + consume event stream (event bus)</span></div>
+          </div>
+        </div>
+        <div class="conn">Xác định audience</div>
+
+        <div class="tier">
+          <div class="tlabel">Engine<small>core</small></div>
+          <div class="tbody">
+            <div class="box eng"><b>Segment Engine</b><span>Đánh giá điều kiện (batch + realtime) → audience list + size</span></div>
+          </div>
+        </div>
+        <div class="conn">Dispatch qua queue</div>
+
+        <div class="tier">
+          <div class="tlabel">Delivery<small>fan-out</small></div>
+          <div class="tbody">
+            <div class="box"><b>Delivery Workers</b><span>Render message · apply guardrails · retry</span></div>
+            <div class="box"><b>Channel Adapters</b><span>Push · In-App · SMS · Email…</span></div>
+          </div>
+        </div>
+        <div class="conn up">Delivery / engagement events</div>
+
+        <div class="tier">
+          <div class="tlabel">Data<small>store &amp; BI</small></div>
+          <div class="tbody">
+            <div class="box data"><b>User / Event Store</b><span>CDP · DWH · ClickHouse</span></div>
+            <div class="box data"><b>Analytics</b><span>Thu event → aggregate → Reports</span></div>
+          </div>
+        </div>
+
       </div>
-      <div class="flow" style="justify-content:center;margin-top:.7em">
-        <span class="node">UI</span><span class="arrow">→</span>
-        <span class="node">Campaign API</span><span class="arrow">→</span>
-        <span class="node">Segment Engine</span><span class="arrow">→</span>
-        <span class="node">Scheduler</span><span class="arrow">→</span>
-        <span class="node">Delivery</span><span class="arrow">→</span>
-        <span class="node">Channels</span><span class="arrow">→</span>
-        <span class="node">Analytics</span>
-      </div>
-      <p class="foot">HLA — conceptual (spec §10)</p>
+      <p class="foot">HLA — conceptual (spec §10) · data flow ▼ &nbsp;·&nbsp; feedback loop ▲</p>
     </section>
 
     <section>
       <div class="sec-no">PHẦN 04 · Hệ sinh thái</div>
-      <h2>Tích hợp Olympus &amp; NFR</h2>
+      <h2>Tích hợp hệ sinh thái Big Data &amp; NFR</h2>
       <div class="grid g2">
         <div class="card">
           <h3>🔌 Tận dụng services có sẵn</h3>
           <ul class="tight small">
-            <li><strong>medusa</strong> — notification service → backend gửi tin</li>
-            <li><strong>pheme</strong> — multi-channel broadcast gateway</li>
-            <li><strong>athena-go / odin</strong> — nguồn predictive segment</li>
+            <li><strong>Notification service</strong> → backend gửi tin</li>
+            <li><strong>Broadcast gateway</strong> — multi-channel</li>
+            <li><strong>Hệ ML / recommendation</strong> — nguồn predictive segment</li>
             <li>Segment data từ <strong>DWH / ClickHouse</strong></li>
           </ul>
         </div>
@@ -348,10 +411,82 @@
     </section>
   </section>
 
-  <!-- ===== 5. KPIs ===== -->
+  <!-- ===== 5. YÊU CẦU KINH DOANH — CAMPAIGN TRIGGER ===== -->
   <section>
     <section>
-      <div class="sec-no">PHẦN 05</div>
+      <div class="sec-no">PHẦN 05 · Yêu cầu team Kinh doanh (Sub-Online)</div>
+      <h2>Bắt đúng khoảnh khắc → giữ chân &amp; chuyển đổi</h2>
+      <p class="lead" style="max-width:100%;margin-bottom:.5em">Kinh doanh cần CEP <strong>tự động phát hiện</strong> hành vi user theo thời gian thực và push đúng lúc, đúng người. Đây chính là tính năng <strong class="accent">Campaign Trigger</strong> — một phần của CEP, gom thành <strong>3 nhóm mục tiêu</strong>:</p>
+      <div class="grid g3" style="margin-top:.2em">
+        <div class="card" style="border-color:rgba(255,90,90,.45)">
+          <h3 style="color:#ff9a9a">💰 Tăng chuyển đổi</h3>
+          <p style="font-size:.52em">Khi user chần chừ ở bước quyết định:</p>
+          <ul class="tight small" style="font-size:.5em">
+            <li>Gặp tường phí, chưa mua</li>
+            <li>Dừng giữa chừng khi thanh toán</li>
+            <li>User mới chưa bắt đầu dùng</li>
+          </ul>
+          <p style="font-size:.5em;margin-top:.3em"><strong style="color:#ff9a9a">↑ Doanh thu · ↓ Rời bỏ</strong></p>
+        </div>
+        <div class="card" style="border-color:rgba(255,182,72,.45)">
+          <h3>🎬 Tăng lượt xem</h3>
+          <p style="font-size:.52em">Khi user muốn xem nhưng chưa xem được:</p>
+          <ul class="tight small" style="font-size:.5em">
+            <li>Tìm kiếm không ra kết quả</li>
+            <li>Lướt khám phá nhưng chưa xem</li>
+            <li>Bỏ dở nội dung đang xem</li>
+          </ul>
+          <p style="font-size:.5em;margin-top:.3em"><strong>↑ View · ↑ Thời lượng xem</strong></p>
+        </div>
+        <div class="card" style="border-color:rgba(55,214,160,.45)">
+          <h3 style="color:var(--ok)">🔁 Giữ chân &amp; kéo lại</h3>
+          <p style="font-size:.52em">Khi user nguội dần hoặc đã rời đi:</p>
+          <ul class="tight small" style="font-size:.5em">
+            <li>Có nội dung mới hợp gu</li>
+            <li>Lâu ngày không quay lại</li>
+          </ul>
+          <p style="font-size:.5em;margin-top:.3em"><strong style="color:var(--ok)">↑ Giữ chân · Win-back</strong></p>
+        </div>
+      </div>
+      <div class="card" style="margin-top:.55em;border-color:rgba(255,182,72,.4)">
+        <p style="font-size:.5em"><strong>Điểm mấu chốt:</strong> 10 tín hiệu do Kinh doanh đề xuất đều nằm gọn trong CEP — chỉ cần <strong class="accent">cấu hình</strong>, không phải xây hệ thống mới. Push <strong>realtime</strong> (vài giây) &amp; <strong>cá nhân hoá</strong> theo nội dung user vừa xem. Danh mục signal chi tiết → phụ lục.</p>
+      </div>
+      <p class="foot">Nguồn: Business request — Kinh doanh Sub-Online</p>
+    </section>
+
+    <section>
+      <div class="sec-no">PHẦN 05 · Phụ lục · Signal catalog</div>
+      <h2><span style="color:#ff9a9a">P1</span> — Realtime Conversion Signal</h2>
+      <table class="mini" style="font-size:.46em;margin-top:.2em">
+        <tr><th>Signal</th><th>Đối tượng · Trigger</th><th>Timing</th><th>Kênh push</th><th>Business value</th></tr>
+        <tr><td>CONTENT_ACCESS_<br>FRICTION_INAPP</td><td>LITE/Free · bị chặn xem (paywall/preview) nhưng chưa hành động</td><td>Realtime 5–10s</td><td>In-app Floating Card / Bottom Sheet</td><td>↓ Exit Rate · ↑ Conversion → Purchase</td></tr>
+        <tr><td>CONTENT_ACCESS_<br>FRICTION_EXIT</td><td>LITE/Free · bị chặn nội dung rồi thoát app</td><td>Sau exit 3–10 phút</td><td>External Push</td><td>Recall user · ↑ Conversion</td></tr>
+        <tr><td>AD_FRICTION_<br>NO_VIEW</td><td>LITE/Free · gặp Ads nhưng không phát sinh lượt xem</td><td>Realtime / sau exit</td><td>In-app / External Push</td><td>↓ Bounce Rate · ↑ View</td></tr>
+        <tr><td>PURCHASE_<br>INTENT_DROP</td><td>User trong Purchase Flow · dừng ở bất kỳ bước payment</td><td>Sau 30–120s / khi quay lại</td><td>In-app Popup / External Push</td><td>↑ Conversion Payment</td></tr>
+        <tr><td>NRU_<br>ACTIVATION</td><td>NRU · chưa mở app / chưa phát sinh hành vi theo journey</td><td>Journey D0/D3/D5/D7</td><td>External Push / In-app</td><td>↑ Activation · First Watch · Conversion NRU</td></tr>
+      </table>
+      <p class="foot">Phụ lục — chi tiết kỹ thuật, dùng khi Q&amp;A</p>
+    </section>
+
+    <section>
+      <div class="sec-no">PHẦN 05 · Phụ lục · Signal catalog</div>
+      <h2><span class="accent">P2</span> &amp; <span style="color:var(--ok)">P3</span> — Experience &amp; Retention</h2>
+      <table class="mini" style="font-size:.46em;margin-top:.2em">
+        <tr><th>Signal</th><th>Đối tượng · Trigger</th><th>Timing</th><th>Kênh push</th><th>Ưu tiên · Value</th></tr>
+        <tr><td>DISCOVERY_INTENT_<br>NO_VIEW</td><td>Toàn bộ user · chỉ khám phá nhưng chưa xem</td><td>Sau exit</td><td>In-app / External Push</td><td><strong>P2</strong> · ↑ View · Session Time</td></tr>
+        <tr><td>SEARCH_<br>NO_RESULT</td><td>Toàn bộ user · search không có / không phù hợp kết quả</td><td>Realtime</td><td>In-app Recommendation</td><td><strong>P2</strong> · giữ chân · ↑ Discovery</td></tr>
+        <tr><td>CONTENT_RESUME_<br>REMINDER</td><td>User xem dở · exit khi chưa xem hết</td><td>Sau exit</td><td>External Push</td><td><strong>P2</strong> · ↑ Completion Rate</td></tr>
+        <tr><td>HIGH_VALUE_<br>CONTENT_ALERT</td><td>User có sở thích rõ · có nội dung mới phù hợp</td><td>Theo lịch phát hành</td><td>External Push</td><td><span class="ok"><strong>P3</strong></span> · ↑ DAU · Recall</td></tr>
+        <tr><td>USER_<br>REENGAGEMENT</td><td>Inactive / Churn · không quay lại trong khoảng xác định</td><td>Daily Batch / Automation</td><td>External Push / In-app</td><td><span class="ok"><strong>P3</strong></span> · Recall · Win-back · Retention</td></tr>
+      </table>
+      <p class="foot">Phụ lục — chi tiết kỹ thuật, dùng khi Q&amp;A</p>
+    </section>
+  </section>
+
+  <!-- ===== 6. KPIs ===== -->
+  <section>
+    <section>
+      <div class="sec-no">PHẦN 06</div>
       <h2>Độ đo &amp; KPIs</h2>
       <h3 style="margin:.2em 0 .3em">📈 Funnel đo lường</h3>
       <div class="flow" style="justify-content:center;margin-bottom:.7em">
@@ -378,7 +513,7 @@
         <li><strong>Guardrails &amp; consent</strong> bảo vệ trải nghiệm user</li>
         <li><strong>Full funnel analytics</strong> — mọi chiến dịch đều đo được</li>
       </ul>
-      <p class="lead" style="margin-top:1em">Cảm ơn · Q&amp;A · <span class="accent">FPT Play — Olympus / Growth</span></p>
+      <p class="lead" style="margin-top:1em">Cảm ơn · Q&amp;A · <span class="accent">FPT Play — Big Data</span></p>
     </section>
   </section>
 

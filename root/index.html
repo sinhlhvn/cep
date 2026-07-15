@@ -112,6 +112,23 @@
     .conn::before{ content:"▼"; font-size:.8em; }
     .conn.up{ color:var(--ok); }
     .conn.up::before{ content:"▲"; }
+
+    /* stat charts */
+    .barlist{ display:flex; flex-direction:column; gap:.34em; margin-top:.15em; }
+    .barrow{ display:grid; grid-template-columns:8em 1fr; align-items:center; gap:.55em; font-size:.5em; }
+    .barrow .lbl{ color:var(--ink); font-weight:600; text-align:right; line-height:1.05; }
+    .barrow .track{ display:flex; align-items:center; gap:.5em; }
+    .barrow .fill{ height:1.55em; border-radius:5px 5px 5px 5px; min-width:3px;
+                   background:linear-gradient(90deg,var(--brand),var(--brand2)); }
+    .barrow .val{ font-weight:800; color:var(--brand2); font-variant-numeric:tabular-nums; white-space:nowrap; }
+
+    .stack{ display:flex; height:2.1em; border-radius:8px; overflow:hidden; margin-top:.35em; gap:2px; }
+    .stack .seg{ display:flex; align-items:center; justify-content:center; font-size:.46em;
+                 font-weight:800; color:#08121f; min-width:2px; }
+    .legr{ display:flex; align-items:center; gap:.45em; font-size:.5em; margin-top:.4em; }
+    .legr .chip{ width:.85em; height:.85em; border-radius:3px; flex:none; }
+    .legr .lv{ color:var(--muted); }
+    .legr .lv b{ color:#fff; font-variant-numeric:tabular-nums; }
   </style>
 </head>
 <body>
@@ -148,6 +165,62 @@
         <div style="font-size:.5em;color:var(--ink);font-weight:600;margin-top:.35em;line-height:1.3">Độ đo &amp; KPIs</div>
       </div>
     </div>
+  </section>
+
+  <!-- ===== HIỆN TRẠNG PHASE 1 (before CEP) ===== -->
+  <section>
+    <div class="sec-no">HIỆN TRẠNG · Phase 1 — trước khi có CEP</div>
+    <h2 style="margin-bottom:.3em">Nhu cầu đã có thật — ở quy mô này</h2>
+    <div class="grid g4" style="gap:.5em">
+      <div class="card kpi"><div class="n">9</div><div class="l">Channel đang được dùng</div></div>
+      <div class="card kpi"><div class="n">495</div><div class="l">Segment đã khởi tạo</div></div>
+      <div class="card kpi"><div class="n">450</div><div class="l">Segment integration</div></div>
+      <div class="card kpi"><div class="n">5</div><div class="l">Team đang vận hành</div></div>
+    </div>
+
+    <div class="grid" style="grid-template-columns:1.35fr 1fr;gap:.6em;margin-top:.55em">
+      <div class="card">
+        <h3 style="margin-bottom:.1em">Integration theo Channel <span style="color:var(--muted);font-size:.72em;font-weight:600">· tổng 450</span></h3>
+        <div class="barlist">
+          <div class="barrow"><span class="lbl">Event Trigger</span><div class="track"><span class="fill" style="width:100%"></span><span class="val">166</span></div></div>
+          <div class="barrow"><span class="lbl">Facebook Audience</span><div class="track"><span class="fill" style="width:68.7%"></span><span class="val">114</span></div></div>
+          <div class="barrow"><span class="lbl">Internal Ads</span><div class="track"><span class="fill" style="width:51.2%"></span><span class="val">85</span></div></div>
+          <div class="barrow"><span class="lbl">CleverTap</span><div class="track"><span class="fill" style="width:41%"></span><span class="val">68</span></div></div>
+          <div class="barrow"><span class="lbl">Omnisell</span><div class="track"><span class="fill" style="width:5.4%"></span><span class="val">9</span></div></div>
+          <div class="barrow"><span class="lbl">Tiktok Audience</span><div class="track"><span class="fill" style="width:1.8%"></span><span class="val">3</span></div></div>
+          <div class="barrow"><span class="lbl">Google Audience</span><div class="track"><span class="fill" style="width:1.8%"></span><span class="val">3</span></div></div>
+          <div class="barrow"><span class="lbl">BE — S3</span><div class="track"><span class="fill" style="width:1.2%"></span><span class="val">2</span></div></div>
+        </div>
+      </div>
+
+      <div class="grid" style="gap:.55em">
+        <div class="card">
+          <h3 style="margin-bottom:.1em">Integration theo trạng thái</h3>
+          <div class="stack">
+            <div class="seg" style="width:79.3%;background:var(--ok)">complete</div>
+            <div class="seg" style="width:18.4%;background:var(--brand2)">running</div>
+            <div class="seg" style="width:2.3%;background:var(--muted)"></div>
+          </div>
+          <div style="display:flex;gap:1.1em;flex-wrap:wrap">
+            <div class="legr"><span class="chip" style="background:var(--ok)"></span><span class="lv">Complete <b>357</b></span></div>
+            <div class="legr"><span class="chip" style="background:var(--brand2)"></span><span class="lv">Running <b>83</b></span></div>
+            <div class="legr"><span class="chip" style="background:var(--muted)"></span><span class="lv">Stop <b>10</b></span></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3 style="margin-bottom:.1em">Segment theo nhóm KH</h3>
+          <div class="stack">
+            <div class="seg" style="width:98.6%;background:linear-gradient(90deg,var(--brand),var(--brand2))">PayTV Customer</div>
+            <div class="seg" style="width:1.4%;background:var(--muted)"></div>
+          </div>
+          <div style="display:flex;gap:1.1em;flex-wrap:wrap">
+            <div class="legr"><span class="chip" style="background:var(--brand)"></span><span class="lv">PayTV <b>488</b></span></div>
+            <div class="legr"><span class="chip" style="background:var(--muted)"></span><span class="lv">Internet <b>7</b></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="foot">Nguồn: hệ segmentation / integration hiện tại (Phase 1) · 5 team: Sub-Online · PTKD-CS · Big Data · KD Quảng cáo · Backend · CEP = Phase 2</p>
   </section>
 
   <!-- ===== 1. VẤN ĐỀ & TẦM NHÌN ===== -->

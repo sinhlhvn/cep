@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CEP — Customer Engagement Platform</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/night.css" id="theme">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+
+  <style>
+    :root{
+      --brand:#ff7a1a;      /* FPT Play cam */
+      --brand2:#ffb648;
+      --ink:#eaf0f7;
+      --muted:#9fb0c3;
+      --panel:rgba(255,255,255,.05);
+      --panel-b:rgba(255,255,255,.10);
+      --ok:#37d6a0;
+      --bg0:#0b1220;
+      --bg1:#101a2e;
+    }
+    .reveal{ font-family:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+             font-size:30px; color:var(--ink); }
+    .reveal .slides{ text-align:left; }
+    .reveal section{ height:100%; }
+    body{ background:radial-gradient(1200px 700px at 15% -10%, #16233d 0%, var(--bg1) 45%, var(--bg0) 100%); }
+
+    .reveal h1,.reveal h2,.reveal h3{ color:#fff; text-transform:none; letter-spacing:-.01em; font-weight:800; line-height:1.12; }
+    .reveal h1{ font-size:2.0em; }
+    .reveal h2{ font-size:1.35em; margin-bottom:.35em; }
+    .reveal h3{ font-size:1.0em; color:var(--brand2); }
+    .reveal strong{ color:var(--brand2); }
+    .reveal em{ color:var(--muted); font-style:normal; }
+    .reveal a{ color:var(--brand); }
+
+    .accent{ color:var(--brand); }
+    .kicker{ display:inline-block; font-size:.5em; font-weight:700; letter-spacing:.22em;
+             text-transform:uppercase; color:var(--brand); border:1px solid var(--brand);
+             border-radius:999px; padding:.35em 1em; margin-bottom:.6em; }
+    .lead{ color:var(--muted); font-size:.72em; max-width:24em; }
+    .sec-no{ font-size:.55em; color:var(--muted); letter-spacing:.2em; margin-bottom:.2em; }
+
+    /* layout helpers */
+    .grid{ display:grid; gap:.7em; }
+    .g2{ grid-template-columns:1fr 1fr; }
+    .g3{ grid-template-columns:1fr 1fr 1fr; }
+    .g4{ grid-template-columns:repeat(4,1fr); }
+    .card{ background:var(--panel); border:1px solid var(--panel-b); border-radius:16px;
+           padding:.75em .85em; }
+    .card h3{ margin:0 0 .25em; font-size:.62em; letter-spacing:.02em; }
+    .card p{ margin:0; font-size:.5em; color:var(--muted); line-height:1.35; }
+    .card .ico{ font-size:1.1em; }
+
+    ul.tight{ margin:.2em 0 0 0; }
+    .reveal .tight li{ margin:.28em 0; font-size:.72em; line-height:1.35; }
+    .small li{ font-size:.6em !important; }
+
+    /* pill row */
+    .pills{ display:flex; flex-wrap:wrap; gap:.4em; margin-top:.2em; }
+    .pill{ background:var(--panel); border:1px solid var(--panel-b); border-radius:999px;
+           padding:.3em .8em; font-size:.55em; color:var(--ink); }
+    .pill .d{ color:var(--muted); }
+
+    /* pipeline */
+    .flow{ display:flex; align-items:center; flex-wrap:wrap; gap:.35em; font-size:.6em; }
+    .node{ background:linear-gradient(180deg,rgba(255,122,26,.18),rgba(255,122,26,.06));
+           border:1px solid rgba(255,182,72,.4); border-radius:12px; padding:.45em .7em; font-weight:700; }
+    .arrow{ color:var(--brand); font-weight:800; }
+
+    /* lifecycle */
+    .lc{ display:flex; align-items:center; gap:.4em; flex-wrap:wrap; font-size:.6em; }
+    .state{ border-radius:12px; padding:.4em .7em; font-weight:700; border:1px solid var(--panel-b);
+            background:var(--panel); }
+    .state.run{ border-color:var(--ok); color:#bff7e4; }
+    .state.done{ border-color:var(--brand); color:var(--brand2); }
+
+    table.mini{ width:100%; border-collapse:collapse; font-size:.52em; }
+    table.mini th,table.mini td{ text-align:left; padding:.4em .5em; border-bottom:1px solid var(--panel-b); }
+    table.mini th{ color:var(--brand2); font-weight:700; }
+    table.mini td:first-child{ color:#fff; font-weight:600; white-space:nowrap; }
+
+    .kpi{ text-align:center; }
+    .kpi .n{ font-size:1.2em; font-weight:800; color:var(--brand2); }
+    .kpi .l{ font-size:.48em; color:var(--muted); }
+
+    .foot{ position:absolute; bottom:12px; left:24px; font-size:.4em; color:var(--muted);
+           letter-spacing:.1em; }
+    .reveal .slide-number{ background:transparent; color:var(--muted); font-size:16px; }
+
+    /* HLA arch */
+    .arch{ display:grid; grid-template-columns:repeat(4,1fr); gap:.55em; font-size:.55em; }
+    .layer{ background:var(--panel); border:1px solid var(--panel-b); border-radius:14px; padding:.6em .7em; }
+    .layer h4{ margin:0 0 .3em; color:var(--brand2); font-size:1em; }
+    .layer span{ display:block; color:var(--muted); font-size:.85em; line-height:1.4; }
+    .full{ grid-column:1 / -1; }
+    .store{ background:linear-gradient(180deg,rgba(55,214,160,.14),rgba(55,214,160,.04));
+            border-color:rgba(55,214,160,.35); }
+  </style>
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+  <!-- ===== TITLE ===== -->
+  <section data-background-gradient="radial-gradient(900px 600px at 80% 10%, rgba(255,122,26,.22), transparent), linear-gradient(160deg,#0f1a30,#0b1220)">
+    <span class="kicker">FPT Play · Olympus · Growth</span>
+    <h1>Customer Engagement<br><span class="accent">Platform (CEP)</span></h1>
+    <p class="lead" style="margin-top:.6em">Nền tảng <strong>self-service</strong> giúp team Marketing / Growth / Product tự tạo campaign gửi notification đến đúng tập người dùng — không cần engineer.</p>
+    <div class="pills" style="margin-top:1.1em">
+      <span class="pill">1 · Vấn đề &amp; Tầm nhìn</span>
+      <span class="pill">2 · Cách hoạt động</span>
+      <span class="pill">3 · Tính năng chính</span>
+      <span class="pill">4 · Kiến trúc HLA</span>
+      <span class="pill">5 · Độ đo &amp; KPIs</span>
+    </div>
+  </section>
+
+  <!-- ===== 1. VẤN ĐỀ & TẦM NHÌN ===== -->
+  <section>
+    <section>
+      <div class="sec-no">PHẦN 01</div>
+      <h2>Vấn đề &amp; Tầm nhìn</h2>
+      <div class="grid g2" style="margin-top:.4em">
+        <div class="card" style="border-color:rgba(255,90,90,.4)">
+          <h3>🔥 Hiện trạng — Vấn đề</h3>
+          <p style="font-size:.58em">Việc gửi notification (push / in-app / SMS / email) còn <strong style="color:#ff9a9a">rời rạc &amp; thủ công</strong>:</p>
+          <ul class="tight small">
+            <li>Phụ thuộc engineer chạy script thủ công</li>
+            <li>Khó nhắm đúng tập user mục tiêu</li>
+            <li>Khó đo lường hiệu quả chiến dịch</li>
+            <li>Không có nơi quản lý tập trung</li>
+            <li>Marketing <strong style="color:#ff9a9a">không tự chủ động</strong> được</li>
+            <li>Đang dùng <strong style="color:#ff9a9a">third party</strong> để bắn notification → sync dữ liệu ra ngoài, <strong style="color:#ff9a9a">không đảm bảo security</strong></li>
+            <li>Nhu cầu phía marketer ngày càng phức tạp</li>
+            <li>Tool third party <strong style="color:#ff9a9a">không hỗ trợ</strong> in-app noti / in-app popup</li>
+          </ul>
+        </div>
+        <div class="card" style="border-color:rgba(55,214,160,.4)">
+          <h3>🎯 Tầm nhìn — Mục tiêu</h3>
+          <p style="font-size:.58em">Một nền tảng <strong>self-service</strong> để team growth có thể:</p>
+          <ul class="tight small">
+            <li>Định nghĩa <strong>segment</strong> theo nhiều tiêu chí</li>
+            <li>Tạo <strong>campaign</strong> gửi tới segment đó</li>
+            <li>Lên lịch / trigger theo event, cá nhân hoá</li>
+            <li>Theo dõi hiệu quả: delivery → open → click → conversion</li>
+          </ul>
+        </div>
+      </div>
+      <p class="foot">CEP — Product Definition · FPT Play</p>
+    </section>
+
+    <section>
+      <div class="sec-no">PHẦN 01</div>
+      <h2>Ai dùng CEP? <span style="font-size:.6em;color:var(--muted)">(Personas)</span></h2>
+      <table class="mini" style="margin-top:.3em">
+        <tr><th>Persona</th><th>Nhu cầu chính</th></tr>
+        <tr><td>Marketer / Growth</td><td>Campaign khuyến mãi, retention, win-back; tự định nghĩa segment</td></tr>
+        <tr><td>Product Manager</td><td>Thông báo tính năng mới, onboarding flow</td></tr>
+        <tr><td>Operator / CS</td><td>Thông báo vận hành: bảo trì, sự cố, nhắc gia hạn</td></tr>
+        <tr><td>Admin</td><td>Quản lý quyền, channel config, rate limit, approval</td></tr>
+        <tr><td>Data / Analyst</td><td>Định nghĩa segment phức tạp, đọc báo cáo hiệu quả</td></tr>
+      </table>
+      <div class="card" style="margin-top:.7em">
+        <h3>🚫 Ngoài phạm vi (Non-goals)</h3>
+        <p style="font-size:.55em">Không phải CDP đầy đủ · Không tự xây ML recommendation (dùng <em>athena-go/odin</em>) · Không thay thế transactional notification của backend (OTP, payment receipt)</p>
+      </div>
+    </section>
+  </section>
+
+  <!-- ===== 2. CÁCH HOẠT ĐỘNG ===== -->
+  <section>
+    <section>
+      <div class="sec-no">PHẦN 02</div>
+      <h2>CEP hoạt động thế nào?</h2>
+      <p class="lead" style="max-width:100%;margin-bottom:.6em">Một pipeline trung tâm — hầu hết tính năng đều gắn vào đây:</p>
+      <div class="flow" style="justify-content:center;margin:.4em 0 .8em">
+        <span class="node">User</span><span class="arrow">▸ thuộc về ▸</span>
+        <span class="node">Segment</span><span class="arrow">▸ nhắm bởi ▸</span>
+        <span class="node">Campaign</span><span class="arrow">▸ gửi ▸</span>
+        <span class="node">Message</span><span class="arrow">▸ qua ▸</span>
+        <span class="node">Channel</span><span class="arrow">▸ tới ▸</span>
+        <span class="node">User</span>
+      </div>
+      <div class="grid g3" style="margin-top:.3em">
+        <div class="card"><span class="ico">👥</span><h3>Segment</h3><p>Tập người dùng tái sử dụng, xác định bằng điều kiện</p></div>
+        <div class="card"><span class="ico">📣</span><h3>Campaign</h3><p>Một chiến dịch gửi tin: target + channel + content + lịch</p></div>
+        <div class="card"><span class="ico">✉️</span><h3>Message</h3><p>Nội dung có template + biến cá nhân hoá + deep link</p></div>
+        <div class="card"><span class="ico">📡</span><h3>Channel</h3><p>Kênh phân phối: push, in-app, SMS, email…</p></div>
+        <div class="card"><span class="ico">⚡</span><h3>Event</h3><p>Tín hiệu hành vi realtime để trigger campaign</p></div>
+        <div class="card"><span class="ico">🔁</span><h3>Lifecycle</h3><p>State machine điều phối vòng đời campaign</p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-no">PHẦN 02 · Key concept</div>
+      <h2>7 loại Segment</h2>
+      <p class="lead" style="max-width:100%">Tăng dần theo độ phức tạp:</p>
+      <div class="grid g2" style="margin-top:.3em">
+        <div class="card small"><h3>1 · Static / List</h3><p>Tập cố định, upload CSV / chọn thủ công. VD: danh sách trúng thưởng</p></div>
+        <div class="card small"><h3>2 · Rule-based (Attribute)</h3><p>Điều kiện trên attribute + AND/OR/NOT. <code style="color:var(--brand2)">package=premium AND region in [HN,HCM]</code></p></div>
+        <div class="card small"><h3>3 · Behavioral / Event</h3><p>Hành vi theo thời gian: đã xem ≥3 phim Anime / 7 ngày; inactive 14 ngày</p></div>
+        <div class="card small"><h3>4 · Lifecycle / Subscription</h3><p>trial · active · expiring ≤3d · expired · churned · win-back</p></div>
+        <div class="card small"><h3>5 · Computed / Predictive</h3><p>churn score, LTV tier, affinity — từ <em>athena-go / odin</em></p></div>
+        <div class="card small"><h3>6 · Real-time / Trigger</h3><p>Đánh giá ngay khi event xảy ra → đưa vào journey</p></div>
+      </div>
+      <div class="card small" style="margin-top:.55em;border-color:rgba(255,182,72,.4)">
+        <h3>7 · Composite</h3><p>Kết hợp segment bằng phép tập hợp: <strong>(Premium) ∩ (Inactive 14d) − (Đã nhận campaign X)</strong> · Union / Intersection / Difference</p></div>
+    </section>
+
+    <section>
+      <div class="sec-no">PHẦN 02 · Key concept</div>
+      <h2>Campaign Types &amp; Channels</h2>
+      <div class="grid g2">
+        <div>
+          <h3 style="margin-bottom:.3em">5 loại Campaign</h3>
+          <ul class="tight small">
+            <li><strong>One-time / Broadcast</strong> — gửi 1 lần (phim mới ra mắt)</li>
+            <li><strong>Recurring</strong> — lặp theo cron ("phim hot tuần này")</li>
+            <li><strong>Triggered</strong> — khi event xảy ra (nhắc gia hạn)</li>
+            <li><strong>Journey / Multi-step</strong> — chuỗi message theo flow</li>
+            <li><strong>Transactional</strong> — bám event hệ thống, ưu tiên cao</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="margin-bottom:.3em">Channels</h3>
+          <div class="pills">
+            <span class="pill">📱 App Push</span><span class="pill">📺 OTT/TV Push</span>
+            <span class="pill">🌐 Web Push</span><span class="pill">💬 In-App Msg</span>
+            <span class="pill">📥 In-App Inbox</span><span class="pill">✉️ SMS</span>
+            <span class="pill">📧 Email</span><span class="pill">🟦 Zalo OA</span>
+            <span class="pill">🟢 WhatsApp/Viber</span>
+          </div>
+          <p style="font-size:.5em;color:var(--muted);margin-top:.6em">Single · <strong>Multi-channel</strong> (song song) · <strong>Fallback</strong> (push fail → SMS)</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top:.5em">
+        <h3>🔁 Campaign Lifecycle</h3>
+        <div class="lc" style="margin-top:.35em">
+          <span class="state">Draft</span><span class="arrow">→</span>
+          <span class="state">Pending Approval</span><span class="arrow">→</span>
+          <span class="state">Scheduled</span><span class="arrow">→</span>
+          <span class="state run">Running ⇄ Paused</span><span class="arrow">→</span>
+          <span class="state done">Completed</span>
+          <span style="color:var(--muted);font-size:.85em">· Cancelled / Archived</span>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ===== 3. TÍNH NĂNG CHÍNH ===== -->
+  <section>
+    <section>
+      <div class="sec-no">PHẦN 03</div>
+      <h2>Các tính năng chính</h2>
+      <div class="grid g2" style="margin-top:.3em">
+        <div class="card small"><h3>🎛️ Segment Management</h3><p>CRUD 7 loại segment · visual condition builder · size preview + sample users · composite &amp; suppression list</p></div>
+        <div class="card small"><h3>📣 Campaign Management</h3><p>CRUD + lifecycle · multi-channel + fallback · A/B testing · scheduling (one-time / recurring / trigger) · duplicate &amp; template</p></div>
+        <div class="card small"><h3>✍️ Content &amp; Personalization</h3><p>Template engine với biến profile/event · localization vi/en · deep link · rich media · preview theo device/channel</p></div>
+        <div class="card small"><h3>📊 Analytics &amp; Reporting</h3><p>Funnel Sent→Delivered→Opened→Clicked→Converted · per campaign/variant/segment/channel · export &amp; dashboard</p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-no">PHẦN 03 · Bắt buộc</div>
+      <h2>🛡️ Delivery Guardrails &amp; Governance</h2>
+      <p class="lead" style="max-width:100%">Quy tắc cross-cutting — <strong>không thể bỏ qua</strong> ở mọi delivery path:</p>
+      <div class="grid g3" style="margin-top:.4em">
+        <div class="card small"><h3>Frequency Capping</h3><p>≤ N message / user / ngày</p></div>
+        <div class="card small"><h3>Quiet Hours / DND</h3><p>Theo timezone của user</p></div>
+        <div class="card small"><h3>Throttling</h3><p>Rate limit theo channel / provider</p></div>
+        <div class="card small"><h3>Dedup &amp; Idempotency</h3><p>At-least-once nhưng không gửi trùng</p></div>
+        <div class="card small" style="border-color:rgba(255,122,26,.5)"><h3>Consent / Opt-out</h3><p><strong>Bắt buộc, riêng từng channel</strong></p></div>
+        <div class="card small"><h3>PII &amp; Compliance</h3><p>Mã hoá · RBAC · audit · NĐ 13/2023</p></div>
+      </div>
+      <div class="card" style="margin-top:.6em;border-color:rgba(255,182,72,.4)">
+        <p style="font-size:.55em"><strong>Governance:</strong> RBAC + audit log mọi thao tác · Approval workflow (maker–checker) cho campaign lớn · Suppression list toàn cục cho user unsubscribe</p>
+      </div>
+    </section>
+  </section>
+
+  <!-- ===== 4. KIẾN TRÚC HLA ===== -->
+  <section>
+    <section>
+      <div class="sec-no">PHẦN 04</div>
+      <h2>Kiến trúc High-Level (HLA)</h2>
+      <div class="arch" style="margin-top:.3em">
+        <div class="layer"><h4>Console / UI</h4><span>Nơi tạo segment &amp; campaign (self-service)</span></div>
+        <div class="layer"><h4>Campaign Service</h4><span>CRUD · lifecycle · orchestration</span></div>
+        <div class="layer store"><h4>Segment Engine</h4><span>Evaluate điều kiện (batch + realtime) → audience + size</span></div>
+        <div class="layer store"><h4>User / Event Store</h4><span>CDP · DWH · ClickHouse</span></div>
+
+        <div class="layer"><h4>Scheduler / Trigger</h4><span>Cron + consume event stream (event bus)</span></div>
+        <div class="layer"><h4>Delivery Workers</h4><span>Render msg · apply guardrails · dispatch qua queue</span></div>
+        <div class="layer"><h4>Channel Adapters</h4><span>Push · In-App · SMS · Email…</span></div>
+        <div class="layer"><h4>Analytics</h4><span>Thu delivery/engagement event → Reports</span></div>
+      </div>
+      <div class="flow" style="justify-content:center;margin-top:.7em">
+        <span class="node">UI</span><span class="arrow">→</span>
+        <span class="node">Campaign API</span><span class="arrow">→</span>
+        <span class="node">Segment Engine</span><span class="arrow">→</span>
+        <span class="node">Scheduler</span><span class="arrow">→</span>
+        <span class="node">Delivery</span><span class="arrow">→</span>
+        <span class="node">Channels</span><span class="arrow">→</span>
+        <span class="node">Analytics</span>
+      </div>
+      <p class="foot">HLA — conceptual (spec §10)</p>
+    </section>
+
+    <section>
+      <div class="sec-no">PHẦN 04 · Hệ sinh thái</div>
+      <h2>Tích hợp Olympus &amp; NFR</h2>
+      <div class="grid g2">
+        <div class="card">
+          <h3>🔌 Tận dụng services có sẵn</h3>
+          <ul class="tight small">
+            <li><strong>medusa</strong> — notification service → backend gửi tin</li>
+            <li><strong>pheme</strong> — multi-channel broadcast gateway</li>
+            <li><strong>athena-go / odin</strong> — nguồn predictive segment</li>
+            <li>Segment data từ <strong>DWH / ClickHouse</strong></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>⚙️ Non-Functional</h3>
+          <ul class="tight small">
+            <li><strong>Scale</strong>: hàng triệu user / campaign</li>
+            <li><strong>Throughput</strong>: burst push cao, queue + backpressure</li>
+            <li><strong>Latency</strong>: triggered gửi trong vài giây sau event</li>
+            <li><strong>Reliability</strong>: at-least-once + dedup, retry backoff</li>
+            <li><strong>Observability</strong>: metrics · tracing · alert</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" style="margin-top:.5em;border-color:rgba(255,182,72,.4)">
+        <p style="font-size:.52em"><strong>Phasing:</strong> <em>P1</em> static+rule segment · one-time+scheduled · Push+In-App · basic report ·· <em>P2</em> behavioral/composite · recurring+triggered · A/B · full funnel ·· <em>P3</em> journey · predictive · multi-channel fallback · approval</p>
+      </div>
+    </section>
+  </section>
+
+  <!-- ===== 5. KPIs ===== -->
+  <section>
+    <section>
+      <div class="sec-no">PHẦN 05</div>
+      <h2>Độ đo &amp; KPIs</h2>
+      <h3 style="margin:.2em 0 .3em">📈 Funnel đo lường</h3>
+      <div class="flow" style="justify-content:center;margin-bottom:.7em">
+        <span class="node">Sent</span><span class="arrow">→</span>
+        <span class="node">Delivered</span><span class="arrow">→</span>
+        <span class="node">Opened</span><span class="arrow">→</span>
+        <span class="node">Clicked</span><span class="arrow">→</span>
+        <span class="node" style="border-color:var(--ok)">Converted</span>
+      </div>
+      <div class="grid g4" style="gap:.6em">
+        <div class="card kpi"><div class="n">Adoption</div><div class="l">Số campaign/tháng bởi non-engineer · segment tái sử dụng</div></div>
+        <div class="card kpi"><div class="n">Engagement</div><div class="l">Open rate · CTR · conversion uplift vs baseline</div></div>
+        <div class="card kpi"><div class="n">Operational</div><div class="l">Delivery success · thời gian tạo campaign ↓ · opt-out ổn định</div></div>
+        <div class="card kpi"><div class="n">Business</div><div class="l">Retention / win-back uplift · doanh thu từ campaign</div></div>
+      </div>
+    </section>
+
+    <section data-background-gradient="radial-gradient(900px 600px at 20% 90%, rgba(255,122,26,.22), transparent), linear-gradient(160deg,#0f1a30,#0b1220)">
+      <span class="kicker">Tóm lại</span>
+      <h2 style="font-size:1.5em">CEP = tự chủ + đúng đối tượng<br>+ đo được</h2>
+      <ul class="tight" style="margin-top:.5em">
+        <li>Marketing <strong>tự chủ động</strong> campaign, không cần engineer</li>
+        <li><strong>Segment engine</strong> nhắm đúng người, đúng thời điểm</li>
+        <li><strong>Guardrails &amp; consent</strong> bảo vệ trải nghiệm user</li>
+        <li><strong>Full funnel analytics</strong> — mọi chiến dịch đều đo được</li>
+      </ul>
+      <p class="lead" style="margin-top:1em">Cảm ơn · Q&amp;A · <span class="accent">FPT Play — Olympus / Growth</span></p>
+    </section>
+  </section>
+
+</div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script>
+  Reveal.initialize({
+    width: 1280, height: 720, margin: 0.06,
+    minScale: 0.2, maxScale: 1.6,
+    hash: true, slideNumber: 'c/t',
+    transition: 'slide', transitionSpeed: 'fast',
+    plugins: [ RevealHighlight, RevealNotes ]
+  });
+</script>
+</body>
+</html>
